@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView
+from .views import PostListView, search_results
 
 from . import views
 
@@ -13,4 +13,6 @@ urlpatterns = [
          views.post_detail,
 	 name='post_detail'),
     path("single-standard.html", views.singl_test, name="test"),
+    path('search/', search_results, name='search_results'),
+
 ]

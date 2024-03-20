@@ -4,7 +4,8 @@ from .models import Question
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-from .models import Post
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+
 
 
 
@@ -51,3 +52,15 @@ def post_detail(request, year, month, day, post):
     return render(request,
 		  'filmblog/single-standard.html',
 		  {'post': post})
+
+def search_results(request):
+    query = request.GET.get('query')
+    if query:
+        vector = SearchVector('title', 'body')
+        search_query = SearchQuery(query)
+        results = Post.objects.annotate(rank=SearchRank(vector, search_query)).filter(rank__gte=0.3).order_by('-rank')
+    else:
+        results = []
+    return render(request, 'filmblog/search_results.html', {'results': results, 'query': query})
+
+
