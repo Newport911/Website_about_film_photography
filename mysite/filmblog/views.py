@@ -26,7 +26,7 @@ def blog(request):
 class PostListView(ListView):
     def get(self, request):
         object_list = Post.published.all()
-        per_page = 1  # количество постов на странице для пагинации
+        per_page = 8  # количество постов на странице для пагинации
         paginator = Paginator(object_list, per_page)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)

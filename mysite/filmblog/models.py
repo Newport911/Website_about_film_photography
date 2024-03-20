@@ -8,6 +8,7 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
 
+
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
@@ -21,8 +22,6 @@ class PublishedManager(models.Manager):
                           .filter(status='published')
 
 
-
-
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -34,6 +33,7 @@ class Post(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='blog_posts')
+    preview = models.TextField(blank=True)
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
