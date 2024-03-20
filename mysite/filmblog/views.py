@@ -3,6 +3,10 @@ from django.shortcuts import render, get_object_or_404
 from .models import Question
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
+from .models import Post
+
+
 
 
 def index(request):
@@ -18,16 +22,19 @@ def blog(request):
     ]
     return render(request, "filmblog/index.html", context=context)
 
-def post_list(request):
-    object_list = Post.published.all()
-    per_page = 1
-    paginator = Paginator(object_list, per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+class PostListView(ListView):
+    def get(self, request):
+        object_list = Post.published.all()
+        per_page = 1  # количество постов на странице для пагинации
+        paginator = Paginator(object_list, per_page)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-    return render(request,
-	          'filmblog/index.html',
-          {'page_obj': page_obj})
+        return render(
+            request,
+            'filmblog/index.html',
+            {'page_obj': page_obj}
+        )
 
 # def post_list(request):
 #     posts = Post.published.all()
