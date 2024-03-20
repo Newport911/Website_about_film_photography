@@ -7,6 +7,9 @@ from .models import Post
 def index(request):
     return render(request, "filmblog/index.html")
 
+def singl_test(request):
+    return render(request, "filmblog/single-standard.html")
+
 def blog(request):
     posts = Post.published.all()
     context=[

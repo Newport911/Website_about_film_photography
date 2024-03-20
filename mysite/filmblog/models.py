@@ -52,7 +52,7 @@ class Post(models.Model):
     published = PublishedManager()  # Собственный менеджер
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
+        return reverse('filmblog:post_detail',
                        args=[self.publish.year,
                              self.publish.month,
                              self.publish.day,
