@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Question
 from .models import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
@@ -18,10 +19,21 @@ def blog(request):
     return render(request, "filmblog/index.html", context=context)
 
 def post_list(request):
-    posts = Post.published.all()
+    object_list = Post.published.all()
+    per_page = 1
+    paginator = Paginator(object_list, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request,
 	          'filmblog/index.html',
-	          {'posts': posts})
+          {'page_obj': page_obj})
+
+# def post_list(request):
+#     posts = Post.published.all()
+#     return render(request,
+# 	          'filmblog/index.html',
+# 	          {'posts': posts})
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,
@@ -30,5 +42,5 @@ def post_detail(request, year, month, day, post):
 			     publish__month=month,
 			     publish__day=day)
     return render(request,
-		  'filmblog/index.html',
+		  'filmblog/single-standard.html',
 		  {'post': post})
