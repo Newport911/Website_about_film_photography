@@ -53,6 +53,7 @@ def post_detail(request, year, month, day, post):
 		  'filmblog/single-standard.html',
 		  {'post': post})
 
+
 def search_results(request):
     query = request.GET.get('query')
     if query:

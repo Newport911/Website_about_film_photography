@@ -35,6 +35,7 @@ class Post(models.Model):
                                related_name='blog_posts')
     preview = models.TextField(blank=True)
     body = models.TextField()
+    image = models.ImageField(null=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
