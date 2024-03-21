@@ -36,6 +36,7 @@ class Post(models.Model):
     preview = models.TextField(blank=True)
     body = models.TextField()
     image = models.ImageField(null=True, blank=True)
+    image_preview = models.ImageField(null=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -58,3 +59,11 @@ class Post(models.Model):
                              self.publish.month,
                              self.publish.day,
                              self.slug])
+
+    @property
+    def image_previewURL(self):
+        try:
+            url = self.image_preview.url
+        except:
+            url = ''
+        return url

@@ -23,6 +23,7 @@ def blog(request):
     ]
     return render(request, "filmblog/index.html", context=context)
 
+
 class PostListView(ListView):
     def get(self, request):
         object_list = Post.published.all()
