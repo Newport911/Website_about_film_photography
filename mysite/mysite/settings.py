@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "taggit",
     "filmblog.apps.FilmblogConfig",
     'django.contrib.admin',
     'django.contrib.auth',

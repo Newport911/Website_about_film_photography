@@ -5,28 +5,32 @@ from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from taggit.models import Tag
 
 
 
-
-
-def index(request):
-    return render(request, "filmblog/index.html")
-
-def singl_test(request):
-    return render(request, "filmblog/single-standard.html")
-
-def blog(request):
-    posts = Post.published.all()
-    context=[
-
-    ]
-    return render(request, "filmblog/index.html", context=context)
+# def index(request):
+#     return render(request, "filmblog/index.html")
+#
+# def singl_test(request):
+#     return render(request, "filmblog/single-standard.html")
+#
+# def blog(request):
+#     posts = Post.published.all()
+#     context=[
+#
+#     ]
+#     return render(request, "filmblog/index.html", context=context)
 
 
 class PostListView(ListView):
-    def get(self, request):
+    def get(self, request, tag_slug=None):
         object_list = Post.published.all()
+        tag = None
+
+        if tag_slug:
+            tag = get_object_or_404(Tag, slug=tag_slug)
+            object_list = object_list.filter(tags__in=[tag])
         per_page = 8  # количество постов на странице для пагинации
         paginator = Paginator(object_list, per_page)
         page_number = request.GET.get('page')
@@ -35,7 +39,7 @@ class PostListView(ListView):
         return render(
             request,
             'filmblog/index.html',
-            {'page_obj': page_obj}
+            {'page_obj': page_obj, 'tag': tag}
         )
 
 # def post_list(request):
@@ -49,7 +53,7 @@ def post_detail(request, year, month, day, post):
 			     status='published',
 			     publish__year=year,
 			     publish__month=month,
-			     publish__day=day)
+			     publish__day=day,)
     return render(request,
 		  'filmblog/single-standard.html',
 		  {'post': post})

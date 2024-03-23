@@ -7,12 +7,9 @@ app_name = 'filmblog'
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("blog", PostListView.as_view(), name="2"),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/',
-         views.post_detail,
-	 name='post_detail'),
-    path("single-standard.html", views.singl_test, name="test"),
+    path("", PostListView.as_view(), name="index"),
+    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
     path('search/', search_results, name='search_results'),
+    path('tag/<slug:tag_slug>/', PostListView.as_view(), name='post_list_by_tag')
 
 ]
