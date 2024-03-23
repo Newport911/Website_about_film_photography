@@ -293,22 +293,31 @@
                         </p>
                     </div> <!-- end entry content -->
 
-                    <div class="entry__pagenav">
-                        <div class="entry__nav">
-                            <div class="entry__prev">
-                                <a href="#0" rel="prev">
-                                    <span>Previous Post</span>
-                                    Tips on Minimalist Design 
-                                </a>
-                            </div>
-                            <div class="entry__next">
-                                <a href="#0" rel="next">
-                                    <span>Next Post</span>
-                                    Less Is More 
-                                </a>
-                            </div>
-                        </div>
-                    </div> <!-- end entry__pagenav -->
+<div class="entry__pagenav">
+    <div class="entry__nav">
+        {% if prev_post %}
+        <div class="entry__prev">
+            <a href="{{ prev_post.get_absolute_url }}" rel="prev">
+                <span>Previous Post</span>
+                {{ prev_post.title }}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if not prev_post and not next_post %}
+        <!-- Если это первый и последний пост, не показывать навигацию -->
+        {% else %}
+        <div class="entry__next">
+            <a href="{{ next_post.get_absolute_url }}" rel="next">
+                <span>Next Post</span>
+                {{ next_post.title }}
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
 
                     <div class="entry__related">
                         <h3 class="h2">Related Articles</h3>

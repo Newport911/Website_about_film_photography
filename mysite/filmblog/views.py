@@ -9,6 +9,7 @@ from taggit.models import Tag
 
 
 
+
 # def index(request):
 #     return render(request, "filmblog/index.html")
 #
@@ -50,13 +51,23 @@ class PostListView(ListView):
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,
-			     status='published',
-			     publish__year=year,
-			     publish__month=month,
-			     publish__day=day,)
-    return render(request,
-		  'filmblog/single-standard.html',
-		  {'post': post})
+                             status='published',
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
+
+    try:
+        prev_post = post.get_previous_by_publish(status='published')
+    except Post.DoesNotExist:
+        prev_post = None
+
+    try:
+        next_post = post.get_next_by_publish(status='published')
+    except Post.DoesNotExist:
+        next_post = None
+
+    return render(request, 'filmblog/single-standard.html',
+                  {'post': post, 'prev_post': prev_post, 'next_post': next_post})
 
 
 def search_results(request):
