@@ -1,27 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Question
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from taggit.models import Tag
-
-
-
-
-# def index(request):
-#     return render(request, "filmblog/index.html")
-#
-# def singl_test(request):
-#     return render(request, "filmblog/single-standard.html")
-#
-# def blog(request):
-#     posts = Post.published.all()
-#     context=[
-#
-#     ]
-#     return render(request, "filmblog/index.html", context=context)
 
 
 class PostListView(ListView):
@@ -43,11 +26,6 @@ class PostListView(ListView):
             {'page_obj': page_obj, 'tag': tag}
         )
 
-# def post_list(request):
-#     posts = Post.published.all()
-#     return render(request,
-# 	          'filmblog/index.html',
-# 	          {'posts': posts})
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,

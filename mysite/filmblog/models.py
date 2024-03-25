@@ -36,6 +36,7 @@ class Post(models.Model):
                                on_delete=models.CASCADE,
                                related_name='blog_posts')
     preview = models.TextField(blank=True)
+    original_author = models.CharField(null=True, blank=True, max_length=250)
     body = models.TextField()
     image = models.ImageField(null=True, blank=True)
     image_preview = models.ImageField(null=True, blank=True)
