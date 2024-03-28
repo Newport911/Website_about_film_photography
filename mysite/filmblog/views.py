@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import Post
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.views.generic import ListView
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
 from taggit.models import Tag
-
 
 
 class PostListView(ListView):
@@ -59,6 +57,3 @@ def search_results(request):
     else:
         results = []
     return render(request, 'filmblog/search_results.html', {'results': results, 'query': query})
-
-
-
