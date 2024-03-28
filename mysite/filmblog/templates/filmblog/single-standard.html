@@ -79,7 +79,6 @@
             </div>
 
             <nav class="header__nav-wrap">
-
                 <ul class="header__nav">
                     <li><a href="http://127.0.0.1:8000/filmblog/" title="">Home</a></li>
                     <li class="has-children">
@@ -131,7 +130,6 @@
                         </a>
                     </li>
                 </ul>
-
             </nav> <!-- end header__nav-wrap -->
 
         </header> <!-- end s-header -->
@@ -148,8 +146,8 @@
                         {{ post.title }}
                         </h1>
                         <ul class="entry__header-meta">
-                            <li class="author">Автор: <a href="#0"> {{ post.original_author }}</a></li>
-                            <li class="date">{{ post.publish }}</li>
+                            <li class="author">Автор: {{ post.original_author }}</li>
+                            <li class="date">Дата публикации: {{ post.publish|date:"Y m d" }}</li>
                         </ul>
                     </div> <!-- end entry__header -->
                     {% block content %}
@@ -233,8 +231,6 @@
 
             
                     </div> <!-- end comment-respond -->
-            
-                </div> <!-- end comments-wrap -->
             </main>
 
         </div> <!-- end s-content -->
