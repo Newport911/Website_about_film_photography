@@ -1,18 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import Post
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.views.generic import ListView
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
 from taggit.models import Tag
-
 
 
 class PostListView(ListView):
     def get(self, request, tag_slug=None):
         object_list = Post.published.all()
         tag = None
+
+        articles = Post.objects.filter(tags__name=tag)
 
         if tag_slug:
             tag = get_object_or_404(Tag, slug=tag_slug)
@@ -25,7 +25,7 @@ class PostListView(ListView):
         return render(
             request,
             'filmblog/index.html',
-            {'page_obj': page_obj, 'tag': tag}
+            {'page_obj': page_obj, 'tag': tag, 'articles': articles}
         )
 
 
@@ -59,6 +59,3 @@ def search_results(request):
     else:
         results = []
     return render(request, 'filmblog/search_results.html', {'results': results, 'query': query})
-
-
-
