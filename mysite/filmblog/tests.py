@@ -57,3 +57,9 @@ class Search_resultsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         # Проверка, что результаты пусты
         self.assertIn("No search query provided.", response.content.decode())
+
+
+class PostListViewTestCase(TestCase):
+    def test_post_list_View(self):
+        response = self.client.get(reverse("filmblog:index"))
+        self.assertContains(response, "Home")

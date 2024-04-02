@@ -12,6 +12,8 @@ class PostListView(ListView):
         object_list = Post.published.all()
         tag = None
 
+        articles = Post.objects.filter(tags__name=tag)
+
         if tag_slug:
             tag = get_object_or_404(Tag, slug=tag_slug)
             object_list = object_list.filter(tags__in=[tag])
@@ -23,7 +25,7 @@ class PostListView(ListView):
         return render(
             request,
             'filmblog/index.html',
-            {'page_obj': page_obj, 'tag': tag}
+            {'page_obj': page_obj, 'tag': tag, 'articles': articles}
         )
 
 

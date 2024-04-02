@@ -7,18 +7,18 @@
     ================================================== -->
     <meta charset="utf-8">
     <title>Typerite</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta content="" name="description">
+    <meta content="" name="author">
 
     <!-- mobile specific metas
     ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="{% static 'filmblog/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'filmblog/css/vendor.css' %}">
-    <link rel="stylesheet" href="{% static 'filmblog/css/main.css' %}">
+    <link href="{% static 'filmblog/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/vendor.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/main.css' %}" rel="stylesheet">
 
     <!-- script
     ================================================== -->
@@ -26,68 +26,70 @@
 
     <!-- favicons
     ================================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'filmblog/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'filmblog/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'filmblog/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'filmblog/site.webmanifest' %}">
+    <link href="{% static 'filmblog/apple-touch-icon.png' %}" rel="apple-touch-icon" sizes="180x180">
+    <link href="{% static 'filmblog/favicon-32x32.png' %}" rel="icon" sizes="32x32" type="image/png">
+    <link href="{% static 'filmblog/favicon-16x16.png' %}" rel="icon" sizes="16x16" type="image/png">
+    <link href="{% static 'filmblog/site.webmanifest' %}" rel="manifest">
 
 </head>
 
 <body>
 
-    <!-- preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader" class="dots-fade">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+<!-- preloader
+================================================== -->
+<div id="preloader">
+    <div class="dots-fade" id="loader">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
+</div>
 
-    <div id="top" class="s-wrap site-wrapper">
+<div class="s-wrap site-wrapper" id="top">
 
-        <!-- site header
-        ================================================== -->
-        <header class="s-header">
+    <!-- site header
+    ================================================== -->
+    <header class="s-header">
 
-            <div class="header__top">
-                <div class="header__logo">
-                    <a class="site-logo" href="http://127.0.0.1:8000/filmblog/">
-                        <img src="{% static 'filmblog/images/logo.svg' %}" alt="Homepage">
-                    </a>
-                </div>
+        <div class="header__top">
+            <div class="header__logo">
+                <a class="site-logo" href="http://127.0.0.1:8000/filmblog/">
+                    <img alt="Homepage" src="{% static 'filmblog/images/logo.svg' %}">
+                </a>
+            </div>
 
-                <div class="header__search">
+            <div class="header__search">
 
-                    <form role="search" method="get" class="header__search-form" action="{% url 'filmblog:search_results' %}">
-                        <label>
-                            <span class="hide-content">Search for:</span>
-                            <input type="search" class="header__search-field" placeholder="Type Keywords" value="" name="query" title="Search for:" autocomplete="off">
-                        </label>
-                        <input type="submit" class="header__search-submit" value="Search">
-                    </form>
+                <form action="{% url 'filmblog:search_results' %}" class="header__search-form" method="get"
+                      role="search">
+                    <label>
+                        <span class="hide-content">Search for:</span>
+                        <input autocomplete="off" class="header__search-field" name="query" placeholder="Type Keywords"
+                               title="Search for:" type="search" value="">
+                    </label>
+                    <input class="header__search-submit" type="submit" value="Search">
+                </form>
 
 
+            </div>  <!-- end header__search -->
 
-                </div>  <!-- end header__search -->
+            <!-- toggles -->
+            <a class="header__search-trigger" href="#0"></a>
+            <a class="header__menu-toggle" href="#0"><span>Menu</span></a>
 
-                <!-- toggles -->
-                <a href="#0" class="header__search-trigger"></a>
-                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
+        </div> <!-- end header__top -->
 
-            </div> <!-- end header__top -->
+        <nav class="header__nav-wrap">
 
-            <nav class="header__nav-wrap">
-
-                <ul class="header__nav">
-                    <li class="current"><a href="http://127.0.0.1:8000/filmblog/" title="">Home</a></li>
-                    <li class="has-children">
-                        <a href="#0" title="">Categories</a>
-                        <ul class="sub-menu"><!-- любой текст
-                        <li><a href="category.html">Lifestyle</a></li>
-                        <li><a href="category.html">Health</a></li>
-                        <li><a href="category.html">Family</a></li>
+            <ul class="header__nav">
+                <li class="current"><a href="http://127.0.0.1:8000/filmblog/" title="">Главная</a></li>
+                <li class="has-children">
+                    <a href="#0" title="">Категории</a>
+                    <ul class="sub-menu">
+                        <li><a href="http://127.0.0.1:8000/filmblog/tag/film/">Пленка</a></li>
+                        <li><a href="http://127.0.0.1:8000/filmblog/tag/author/">Автор</a></li>
+                        <li><a href="http://127.0.0.1:8000/filmblog/tag/bw/">Черно-белое</a></li>
+                                        <!-- любой текст
                         <li><a href="category.html">Management</a></li>
                         <li><a href="category.html">Travel</a></li>
                         <li><a href="category.html">Work</a></li>
@@ -106,57 +108,57 @@
                     <li><a href="page-about.html" title="">About</a></li>
                     <li><a href="page-contact.html" title="">Contact</a></li>
                      -->
-                </ul> <!-- end header__nav -->
+                    </ul> <!-- end header__nav -->
 
-                <ul class="header__social">
-                    <li class="ss-facebook">
-                        <a href="https://facebook.com/">
-                            <span class="screen-reader-text">Facebook</span>
-                        </a>
-                    </li>
-                    <li class="ss-twitter">
-                        <a href="#0">
-                            <span class="screen-reader-text">Twitter</span>
-                        </a>
-                    </li>
-                    <li class="ss-dribbble">
-                        <a href="#0">
-                            <span class="screen-reader-text">Dribbble</span>
-                        </a>
-                    </li>
-                    <li class="ss-pinterest">
-                        <a href="#0">
-                            <span class="screen-reader-text">Behance</span>
-                        </a>
-                    </li>
-                </ul>
-
-
-
-        </header> <!-- end s-header -->
-
-        <div class="s-content">
-            
-            <div class="masonry-wrap">
-
-                <div class="masonry">
-
-                    <div class="grid-sizer"></div>
-                    {% for post in page_obj %}
-
-                    <article class="masonry__brick entry format-standard animate-this"><!-- end article22222222222222222222222222222222222222222222222222222222222222 -->
-
-                        <div class="entry__thumb">
-                            <a href="{{ post.get_absolute_url }}" class="entry__thumb-link">
-                                <img src="{{ post.image_previewURL }}" alt="">
+                    <ul class="header__social">
+                        <li class="ss-facebook">
+                            <a href="https://facebook.com/">
+                                <span class="screen-reader-text">Facebook</span>
                             </a>
-                        </div>
+                        </li>
+                        <li class="ss-twitter">
+                            <a href="#0">
+                                <span class="screen-reader-text">Twitter</span>
+                            </a>
+                        </li>
+                        <li class="ss-dribbble">
+                            <a href="#0">
+                                <span class="screen-reader-text">Dribbble</span>
+                            </a>
+                        </li>
+                        <li class="ss-pinterest">
+                            <a href="#0">
+                                <span class="screen-reader-text">Behance</span>
+                            </a>
+                        </li>
+                    </ul>
 
-                        <div class="entry__text">
-                            <div class="entry__header">
 
-                                <h2 class="entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-                                <div class="entry__meta">
+    </header> <!-- end s-header -->
+
+    <div class="s-content">
+
+        <div class="masonry-wrap">
+
+            <div class="masonry">
+
+                <div class="grid-sizer"></div>
+                {% for post in page_obj %}
+
+                <article class="masonry__brick entry format-standard animate-this">
+                    <!-- end article22222222222222222222222222222222222222222222222222222222222222 -->
+
+                    <div class="entry__thumb">
+                        <a class="entry__thumb-link" href="{{ post.get_absolute_url }}">
+                            <img alt="" src="{{ post.image_previewURL }}">
+                        </a>
+                    </div>
+
+                    <div class="entry__text">
+                        <div class="entry__header">
+
+                            <h2 class="entry__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                            <div class="entry__meta">
                                     <span class="entry__meta-cat">
                                         #
                                              {% for tag in post.tags.all %}
@@ -166,76 +168,80 @@
                                                 {% if not forloop.last %}{% endif %}
                                               {% endfor %}
                                     </span>
-                                </div>
-
                             </div>
-                            <div class="entry__excerpt">
-                                <p>
+
+                        </div>
+                        <div class="entry__excerpt">
+                            <p>
                                 {{ post.preview|truncatewords:30|linebreaks }}
-                                </p>
-                                <span class="entry__meta-date">
+                            </p>
+                            <span class="entry__meta-date">
                                     <b><br>Автор: {{ post.original_author }}</b>
                                 </span>
-                            </div>
                         </div>
-
-                    </article> <!-- end article22222222222222222222222222222222222222222222222222222222222222 -->
-                    {% endfor %}
-                </div> <!-- end masonry -->
-
-            </div> <!-- end masonry-wrap -->
-
-<div class="row">
-    <div class="column large-full">
-        <nav class="pgn">
-            <ul>
-                <li><a class="pgn__prev" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Prev</a></li>
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <li><span class="pgn__num current">{{ num }}</span></li>
-                    {% else %}
-                        <li><a class="pgn__num" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                <li><a class="pgn__next" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Next</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
-            <!-- Добавьте элементы пагинации -->
-<div class="pagination">
-
-</div>
-
-        </div> <!-- end s-content -->
-
-
-        <!-- footer
-        ================================================== -->
-        <footer class="s-footer">
-            <div class="row">
-                <div class="column large-full footer__content">
-                    <div class="footer__copyright">
-                        <!--
-                        <span>© Copyright Typerite 2019</span> 
-                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
-                        -->
                     </div>
+
+                </article> <!-- end article22222222222222222222222222222222222222222222222222222222222222 -->
+                {% endfor %}
+            </div> <!-- end masonry -->
+
+        </div> <!-- end masonry-wrap -->
+
+        <div class="row">
+            <div class="column large-full">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__prev"
+                               href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Prev</a>
+                        </li>
+                        {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <li><span class="pgn__num current">{{ num }}</span></li>
+                        {% else %}
+                        <li><a class="pgn__num" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        <li><a class="pgn__next"
+                               href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- Добавьте элементы пагинации -->
+        <div class="pagination">
+
+        </div>
+
+    </div> <!-- end s-content -->
+
+
+    <!-- footer
+    ================================================== -->
+    <footer class="s-footer">
+        <div class="row">
+            <div class="column large-full footer__content">
+                <div class="footer__copyright">
+                    <!--
+                    <span>© Copyright Typerite 2019</span>
+                    <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    -->
                 </div>
             </div>
+        </div>
 
-            <div class="go-top">
-                <a class="smoothscroll" title="Back to Top" href="#top"></a>
-            </div>
-        </footer>
+        <div class="go-top">
+            <a class="smoothscroll" href="#top" title="Вверх"></a>
+        </div>
+    </footer>
 
-    </div> <!-- end s-wrap -->
+</div> <!-- end s-wrap -->
 
 
-    <!-- Java Script
-    ================================================== -->
-    <script src="{% static 'filmblog/js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'filmblog/js/plugins.js' %}"></script>
-    <script src="{% static 'filmblog/js/main.js' %}"></script>
+<!-- Java Script
+================================================== -->
+<script src="{% static 'filmblog/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'filmblog/js/plugins.js' %}"></script>
+<script src="{% static 'filmblog/js/main.js' %}"></script>
 
 </body>
