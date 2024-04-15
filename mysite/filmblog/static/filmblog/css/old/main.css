@@ -2599,7 +2599,7 @@ input::-moz-focus-inner {
 }
 
 .header__search-form::after {
-  content: "Нажмите Enter для начала поиска.";
+  content: "Press Enter to begin your search.";
   display: block;
   letter-spacing: 0.6px;
   font-size: 1.6rem;
@@ -2938,7 +2938,7 @@ body.search-is-visible {
 
 
 /* ===================================================================
- * # site content & footer
+ * # site content & footer 
  *
  * ------------------------------------------------------------------- */
 .s-content,
@@ -2962,7 +2962,7 @@ body.search-is-visible {
 
 .content__page img {
   margin-top: 3.2rem;
-  margin-bottom: 3.2rem;
+  margin-bottom: 0.1rem;
 }
 
 .content__page-header {
@@ -3004,7 +3004,7 @@ body.search-is-visible {
   display: none;
 }
 
-/* -------------------------------------------------------------------
+/* ------------------------------------------------------------------- 
  * ## go to top
  * ------------------------------------------------------------------- */
 .go-top {
