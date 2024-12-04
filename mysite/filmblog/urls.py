@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, search_results, PostCreateView, PostManageView
+from .views import PostListView, PostCreateView, PostManageView
 
 from . import views
 
@@ -8,8 +8,10 @@ app_name = 'filmblog'
 
 urlpatterns = [
     path("", PostListView.as_view(), name="index"),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-    path('search/', search_results, name='search_results'),
+    path('<int:year>/<int:month>/<int:day>/<slug:post>/',
+         views.PostDetailView.as_view(),
+         name='post_detail'),
+    path('search/', views.SearchResultsView.as_view(), name='search_results'),
     path('tag/<slug:tag_slug>/', PostListView.as_view(), name='post_list_by_tag'),
     path('post/create/', PostCreateView.as_view(), name='post_create'),
     path('posts/manage/', PostManageView.as_view(), name='post_manage'),
