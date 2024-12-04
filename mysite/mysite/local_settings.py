@@ -1,25 +1,26 @@
 import os
-from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = 'django-insecure--obolfim_-s$i=gexofz#&4w8exx(qyz#7^+6w!9=)dcl12cqq'
-
-DEBUG = True
-
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG') == 'True'
 ALLOWED_HOSTS = []
-
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'film',
-        'USER': 'postgres',
-        'PASSWORD': 'hp13199113',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
-STATIC_URL = 'static/'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL'),
+    }
+}
