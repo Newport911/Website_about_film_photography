@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}D76 is art{% endblock %}</title>
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'filmblog/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/vendor.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/main.css' %}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+
+    <script src="{% static 'filmblog/js/modernizr.js' %}"></script>
+
+    <link href="{% static 'filmblog/apple-touch-icon.png' %}" rel="apple-touch-icon" sizes="180x180">
+    <link href="{% static 'filmblog/favicon-32x32.png' %}" rel="icon" sizes="32x32" type="image/png">
+    <link href="{% static 'filmblog/favicon-16x16.png' %}" rel="icon" sizes="16x16" type="image/png">
+    <link href="{% static 'filmblog/site.webmanifest' %}" rel="manifest">
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="dots-fade" id="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="s-wrap site-wrapper" id="top">
+        <header class="s-header">
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="{% url 'filmblog:index' %}">
+                        <img alt="Homepage" src="{% static 'filmblog/images/logo.svg' %}">
+                    </a>
+                </div>
+
+                <div class="header__search">
+                    <form action="{% url 'filmblog:search_results' %}" class="header__search-form" method="get" role="search">
+                        <label>
+                            <span class="hide-content">Поиск:</span>
+                            <input autocomplete="off" class="header__search-field" name="query" placeholder="Ключевые слова" type="search">
+                        </label>
+                        <input class="header__search-submit" type="submit" value="Search">
+                    </form>
+                </div>
+
+                <a class="header__search-trigger" href="#0"></a>
+                <a class="header__menu-toggle" href="#0"><span>Menu</span></a>
+            </div>
+
+            <nav class="header__nav-wrap">
+                <ul class="header__nav">
+                    <li class="current"><a href="{% url 'filmblog:index' %}">Главная</a></li>
+                    <li class="has-children">
+                        <a href="#0">Категории</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'filmblog:post_list_by_tag' 'film' %}">Пленка</a></li>
+                            <li><a href="{% url 'filmblog:post_list_by_tag' 'author' %}">Автор</a></li>
+                            <li><a href="{% url 'filmblog:post_list_by_tag' 'bw' %}">Черно-белое</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="https://facebook.com/"><span class="screen-reader-text">Facebook</span></a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0"><span class="screen-reader-text">Twitter</span></a>
+                    </li>
+                    <li class="ss-dribbble">
+                        <a href="#0"><span class="screen-reader-text">Dribbble</span></a>
+                    </li>
+                    <li class="ss-pinterest">
+                        <a href="#0"><span class="screen-reader-text">Behance</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="s-content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="s-footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                    </div>
+                </div>
+            </div>
+            <div class="go-top">
+                <a class="smoothscroll" href="#top" title="Вверх"></a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="{% static 'filmblog/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'filmblog/js/plugins.js' %}"></script>
+    <script src="{% static 'filmblog/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

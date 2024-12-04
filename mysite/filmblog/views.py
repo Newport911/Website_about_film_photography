@@ -5,10 +5,11 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView
 from django.db.models import Q
 from taggit.models import Tag
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Post
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -89,3 +90,33 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.original_author = self.request.user.username
 
         return super().form_valid(form)
+
+class PostManageView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'filmblog/post_manage.html'
+    context_object_name = 'posts'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-created')
+
+
+from django.views.generic.edit import UpdateView
+
+
+class PostEditView(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'filmblog/post_edit.html'
+    fields = ['title', 'body', 'image', 'image_preview', 'preview', 'status', 'tags']
+
+    def get_success_url(self):
+        return reverse_lazy('filmblog:post_manage')
+
+
+from django.views.generic.edit import DeleteView
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'filmblog/post_confirm_delete.html'
+    success_url = reverse_lazy('filmblog:post_manage')

@@ -1,0 +1,98 @@
+{% extends 'filmblog/base.html' %}
+
+{% block title %}Управление постами{% endblock %}
+
+{% block content %}
+<div class="s-content">
+    <div class="row">
+        <div class="column large-12">
+            <article class="s-content__entry">
+                <div class="s-content__entry-header">
+                    <h1 class="s-content__title">Управление постами</h1>
+                </div>
+
+                <div class="s-content__primary">
+                    <div class="entry__table">
+                        <table class="full-width">
+                            <thead>
+                                <tr>
+                                    <th>Заголовок</th>
+                                    <th>Статус</th>
+                                    <th>Дата создания</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in posts %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.get_status_display }}</td>
+                                    <td>{{ post.created|date:"d.m.Y" }}</td>
+                                    <td>
+                                        <a href="{{ post.get_absolute_url }}" class="btn btn--small">Просмотр</a>
+                                        <a href="{% url 'filmblog:post_edit' post.slug %}" class="btn btn--small btn--primary">Редактировать</a>
+                                        <a href="{% url 'filmblog:post_delete' post.slug %}" class="btn btn--small btn--danger"
+                                           onclick="return confirm('Вы уверены, что хотите удалить этот пост?')">Удалить</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {% if is_paginated %}
+                    <nav class="pgn">
+                        <ul>
+                            {% if page_obj.has_previous %}
+                            <li><a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <li><span class="pgn__num current">{{ num }}</span></li>
+                            {% else %}
+                            <li><a class="pgn__num" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                            <li><a class="pgn__next" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+
+                    <div class="entry__buttons">
+                        <a href="{% url 'filmblog:post_create' %}" class="btn btn--primary full-width">Создать новый пост</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .entry__table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+    }
+    .entry__table th,
+    .entry__table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .btn--danger {
+        background: #dc3545;
+        color: white;
+    }
+    .btn--small {
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
+        margin-right: 0.5rem;
+    }
+</style>
+{% endblock %}

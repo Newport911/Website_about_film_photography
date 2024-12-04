@@ -1,0 +1,36 @@
+{% extends 'filmblog/base.html' %}
+
+{% block title %}Удаление поста{% endblock %}
+
+{% block content %}
+<div class="s-content">
+    <div class="row">
+        <div class="column large-12">
+            <article class="s-content__entry">
+                <div class="s-content__entry-header">
+                    <h1 class="s-content__title">Подтверждение удаления</h1>
+                </div>
+
+                <div class="s-content__primary">
+                    <form method="post">
+                        {% csrf_token %}
+                        <p>Вы уверены, что хотите удалить пост "{{ object.title }}"?</p>
+                        <button type="submit" class="btn btn--danger">Удалить</button>
+                        <a href="{% url 'filmblog:post_manage' %}" class="btn btn--stroke">Отмена</a>
+                    </form>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .btn--danger {
+        background: #dc3545;
+        color: white;
+        margin-right: 1rem;
+    }
+</style>
+{% endblock %}

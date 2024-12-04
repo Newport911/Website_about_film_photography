@@ -1,0 +1,67 @@
+{% extends 'filmblog/base.html' %}
+
+{% block title %}Редактировать пост{% endblock %}
+
+{% block content %}
+<div class="s-content">
+    <div class="row">
+        <div class="column large-12">
+            <article class="s-content__entry">
+                <div class="s-content__entry-header">
+                    <h1 class="s-content__title">Редактировать пост</h1>
+                </div>
+
+                <div class="s-content__primary">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="title">Заголовок:</label>
+                            {{ form.title }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preview">Превью:</label>
+                            {{ form.preview }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="body">Содержание:</label>
+                            {{ form.body }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image_preview">Превью изображение:</label>
+                            {{ form.image_preview }}
+                            {% if post.image_preview %}
+                                <p>Текущее изображение: {{ post.image_preview.name }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Основное изображение:</label>
+                            {{ form.image }}
+                            {% if post.image %}
+                                <p>Текущее изображение: {{ post.image.name }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Статус:</label>
+                            {{ form.status }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tags">Теги:</label>
+                            {{ form.tags }}
+                        </div>
+
+                        <button type="submit" class="btn btn--primary">Сохранить изменения</button>
+                        <a href="{% url 'filmblog:post_manage' %}" class="btn btn--stroke">Отмена</a>
+                    </form>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}
