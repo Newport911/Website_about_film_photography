@@ -5,7 +5,17 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView
 from django.db.models import Q
 from taggit.models import Tag
-
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.utils.text import slugify
+from django.db.models import Q
+from .models import Post
 
 class PostListView(ListView):
     def get(self, request, tag_slug=None):
@@ -59,3 +69,23 @@ def search_results(request):
     else:
         results = []
     return render(request, 'filmblog/search_results.html', {'results': results, 'query': query})
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    template_name = 'filmblog/post_create.html'
+    fields = ['title', 'body', 'image', 'image_preview', 'preview', 'status', 'tags']
+    success_url = reverse_lazy('filmblog:index')
+
+    def form_valid(self, form):
+        # Устанавливаем автора
+        form.instance.author = self.request.user
+
+        # Генерируем slug из заголовка
+        title = form.cleaned_data['title']
+        form.instance.slug = slugify(title)
+
+        # Устанавливаем original_author
+        form.instance.original_author = self.request.user.username
+
+        return super().form_valid(form)

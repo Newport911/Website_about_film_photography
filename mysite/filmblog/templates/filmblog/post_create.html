@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D76 is art - Создать пост</title>
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'filmblog/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/vendor.css' %}" rel="stylesheet">
+    <link href="{% static 'filmblog/css/main.css' %}" rel="stylesheet">
+
+    <script src="{% static 'filmblog/js/modernizr.js' %}"></script>
+
+    <link href="{% static 'filmblog/apple-touch-icon.png' %}" rel="apple-touch-icon" sizes="180x180">
+    <link href="{% static 'filmblog/favicon-32x32.png' %}" rel="icon" sizes="32x32" type="image/png">
+    <link href="{% static 'filmblog/favicon-16x16.png' %}" rel="icon" sizes="16x16" type="image/png">
+    <link href="{% static 'filmblog/site.webmanifest' %}" rel="manifest">
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="dots-fade" id="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="s-wrap site-wrapper" id="top">
+        <header class="s-header">
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="http://127.0.0.1:8000/filmblog/">
+                        <img alt="Homepage" src="{% static 'filmblog/images/logo.svg' %}">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="s-content">
+            <div class="row">
+                <div class="column large-12">
+                    <article class="s-content__entry">
+                        <div class="s-content__entry-header">
+                            <h1 class="s-content__title">Создать новый пост</h1>
+                        </div>
+
+                        <div class="s-content__primary">
+                            <form method="post" enctype="multipart/form-data" class="entry__form">
+                                {% csrf_token %}
+
+                                <div class="form-field">
+                                    <label for="title">Заголовок:</label>
+                                    {{ form.title }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="preview">Превью текст:</label>
+                                    {{ form.preview }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="body">Основной текст:</label>
+                                    {{ form.body }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="image_preview">Превью изображение:</label>
+                                    {{ form.image_preview }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="image">Основное изображение:</label>
+                                    {{ form.image }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="status">Статус публикации:</label>
+                                    {{ form.status }}
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="tags">Теги:</label>
+                                    {{ form.tags }}
+                                </div>
+
+                                <div class="form-field">
+                                    <button type="submit" class="btn btn--primary full-width">Опубликовать</button>
+                                </div>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <footer class="s-footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                    </div>
+                </div>
+            </div>
+            <div class="go-top">
+                <a class="smoothscroll" href="#top" title="Вверх"></a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="{% static 'filmblog/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'filmblog/js/plugins.js' %}"></script>
+    <script src="{% static 'filmblog/js/main.js' %}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formFields = document.querySelectorAll('.form-field input, .form-field textarea, .form-field select');
+            formFields.forEach(field => {
+                field.classList.add('full-width');
+            });
+
+            const bodyField = document.querySelector('#id_body');
+            if (bodyField) {
+                bodyField.style.minHeight = '400px';
+            }
+        });
+    </script>
+</body>
+</html>

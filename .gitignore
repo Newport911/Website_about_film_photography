@@ -60,3 +60,4 @@ mysite/*/migrations/*.py
 *.bak
 *.tmp
 *.temp
+/mysite/static/images/
