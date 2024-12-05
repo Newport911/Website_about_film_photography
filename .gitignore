@@ -1,10 +1,12 @@
-# Python
+### Python ###
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -20,32 +22,33 @@ var/
 .installed.cfg
 *.egg
 
-# Django
+### Django ###
 *.log
 local_settings.py
+prod_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
-static/
 
-# Virtual Environment
-venv/
-ENV/
+### Environment ###
 .env
+.env.local
+.env.prod
 
-# IDE specific files
+### IDE ###
 .idea/
 .vscode/
 *.swp
 *.swo
 .DS_Store
 
-# Project specific
+### Project specific ###
 mysite/filmblog/templates/filmblog/old_tamplates/
-mysite/*/migrations/*.py
-!mysite/*/migrations/__init__.py
 
-# Images and media files
+### Migrations ###
+**/migrations/*.py
+!**/migrations/__init__.py
+
+### Media files ###
 *.jpg
 *.jpeg
 *.png
@@ -56,8 +59,7 @@ mysite/*/migrations/*.py
 *.wmv
 *.avi
 
-# Temporary files
+### Temporary ###
 *.bak
 *.tmp
 *.temp
-/mysite/static/images/
